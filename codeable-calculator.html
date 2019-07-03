@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<link rel="stylesheet" href="css/bootstrap.min.css">
+	</head>
+	<body>
+		<div class="container" style="padding-top:1em; min-width: 600px;">
+			<div class="row justify-content-md-center">
+				<div class="col-lg-8 col-md-10">
+					<h3 class="text-center" style="margin-bottom: 1em;">Codebale Cost Estimate Calculator</h3>
+
+					<form id="calc">
+						<div class="form-row">
+							<div class="form-group col-md-4 col-sm-4">
+								<label for="hours">Hours</label>
+
+								<div class="input-group">
+									<input type="number" class="form-control" id="hours" v-model="hours" />
+									<div class="input-group-append">
+										<div class="input-group-text">Hrs</div>
+									</div>
+								</div>
+							</div>
+							<div class="form-group col-md-4 col-sm-4">
+								<label for="hour-rate">Hour Rate</label>
+								
+								<div class="input-group">
+									<div class="input-group-prepend">
+										<div class="input-group-text">USD</div>
+									</div>
+									<input type="number" class="form-control" id="hour-rate" v-model="hour_rate" />
+								</div>
+							</div>
+							<div class="form-group col-md-4 col-sm-4">
+								<label for="extra-percentage">Extra Percentage</label>
+								
+								<div class="input-group">
+									<div class="input-group-prepend">
+										<div class="input-group-text">
+											<div class="custom-control custom-switch">
+												<input type="checkbox" class="custom-control-input" v-model="use_extra" id="use-extra">
+												<label class="custom-control-label" for="use-extra"></label>
+											</div>
+										</div>
+									</div>
+									<input type="number" class="form-control" id="extra-percentage" v-model="extra_percentage" min="1" max="200" />
+									<div class="input-group-append">
+										<div class="input-group-text">%</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="new-client">Fee By Type of Client</label>
+							
+							<div class="input-group">
+								<div class="input-group-prepend">
+									<div class="input-group-text">
+										<div class="custom-control custom-switch">
+											<input type="checkbox" class="custom-control-input" v-model="is_new_client" id="is-new-client" title="Is New Client" />
+											<label class="custom-control-label" for="is-new-client"></label>
+										</div>
+									</div>
+								</div>
+								<input type="text" class="form-control" readonly="readonly" value="New (17.5%) or Old (15%) Client" />
+							</div>
+						</div>
+						<div class="form-row align-items-end">
+							<div class="form-group col">
+								<label for="total-hours">Total Hours</label>
+								<input type="text" class="form-control" id="total-hours" v-model="total_hours" readonly="readonly" v-on:focus="select_all" />
+							</div>
+
+							<div class="form-group col">
+								<label>&nbsp;</label>
+								<input type="text" class="form-control" v-model="total_hours_formatted" readonly="readonly" v-on:focus="select_all" />
+							</div>
+						</div>
+						<div class="form-row align-items-end">
+							<div class="form-group col-sm-4 col-md-4">
+								<label for="amount">Estimate Amount</label>
+
+								<input type="text" class="form-control" id="amount" :value="amount | money_format" readonly="readonly" v-on:focus="select_all" />
+							</div>
+							<div class="form-group col-sm-4 col-md-4">
+								<label for="client-amount">Client's Amount</label>
+								
+								<input type="text" class="form-control" id="client-amount" :value="client_amount | money_format" readonly="readonly" v-on:focus="select_all" />
+							</div>
+							<div class="form-group col-sm-4 col-md-4">
+								<label for="expert-amount">Expert Amount</label>
+								
+								<input type="text" class="form-control" id="expert-amount" :value="expert_amount | money_format" readonly="readonly" v-on:focus="select_all" />
+							</div>
+						</div>
+						<div class="form-row">
+							<div class="form-group col">
+								<label for="client-fees">Client's Fees</label>
+								
+								
+								<input type="text" class="form-control" id="client-fees" :value="client_fees | money_format" readonly="readonly" v-on:focus="select_all" />
+							</div>
+							<div class="form-group col">
+								<label for="expert-fees">Expert's Fees</label>
+								
+								<input type="text" class="form-control" id="expert-fees" :value="expert_fees | money_format" readonly="readonly" v-on:focus="select_all" />
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+
+		<script src="js/vue.js"></script>
+		<script src="js/codeable-calculator.js"></script>
+	</body>
+</html>
