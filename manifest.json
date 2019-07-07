@@ -2,7 +2,7 @@
     "name": "Codebale Cost Estimate Calculator",
     "version": "1.0.2",
     "description": "Calculate estimates amounts based on working hours",
-    "permissions": ["declarativeContent"],
+    "permissions": ["declarativeContent", "storage"],
     "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
     "background": {
       "scripts": ["js/background.js"],

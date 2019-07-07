@@ -41,9 +41,36 @@
 		},
 		created: function() {
 
+			var self = this;
+
 			this.use_extra = true;
 			this.hours = 1;
 			this.extra_percentage = 35;
+
+			chrome.storage.local.get( [ 'codeale_calc_inputs' ], function( result ) {
+
+				if ( 'codeale_calc_inputs' in result ) {
+
+					self.use_extra = result.codeale_calc_inputs.use_extra;
+					self.hours = result.codeale_calc_inputs.hours;
+					self.extra_percentage = result.codeale_calc_inputs.extra_percentage;
+					self.hour_rate = result.codeale_calc_inputs.hour_rate;
+					self.is_new_client = result.codeale_calc_inputs.is_new_client;
+
+				}
+
+			} );
+
+		},
+		updated: function() {
+
+			chrome.storage.local.set( { codeale_calc_inputs: {
+				hour_rate: this.hour_rate, 
+				hours: this.hours, 
+				use_extra: this.use_extra, 
+				extra_percentage: this.extra_percentage,
+				is_new_client: this.is_new_client
+			} } );
 
 		},
 		watch: {
