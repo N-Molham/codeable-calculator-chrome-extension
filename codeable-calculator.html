@@ -48,6 +48,8 @@
 										<div class="input-group-text">%</div>
 									</div>
 								</div>
+
+								<small class="form-text text-muted">Estimate margin of error %</small>
 							</div>
 						</div>
 						<div class="form-group">
@@ -65,7 +67,7 @@
 								<input type="text" class="form-control" readonly="readonly" value="New (17.5%) or Old (15%) Client" />
 							</div>
 						</div>
-						<div class="form-row align-items-end">
+						<div class="form-row align-items-start">
 							<div class="form-group col">
 								<label for="total-hours">Total Hours</label>
 								<input type="text" class="form-control" id="total-hours" v-model="total_hours" readonly="readonly" v-on:focus="select_all" />
@@ -74,23 +76,6 @@
 							<div class="form-group col">
 								<label>&nbsp;</label>
 								<input type="text" class="form-control" v-model="total_hours_formatted" readonly="readonly" v-on:focus="select_all" />
-							</div>
-						</div>
-						<div class="form-row align-items-end">
-							<div class="form-group col-sm-4 col-md-4">
-								<label for="amount">Estimate Amount</label>
-
-								<input type="text" class="form-control" id="amount" :value="amount | money_format" readonly="readonly" v-on:focus="select_all" />
-							</div>
-							<div class="form-group col-sm-4 col-md-4">
-								<label for="client-amount">Client's Amount</label>
-								
-								<input type="text" class="form-control" id="client-amount" :value="client_amount | money_format" readonly="readonly" v-on:focus="select_all" />
-							</div>
-							<div class="form-group col-sm-4 col-md-4">
-								<label for="expert-amount">Expert Amount</label>
-								
-								<input type="text" class="form-control" id="expert-amount" :value="expert_amount | money_format" readonly="readonly" v-on:focus="select_all" />
 							</div>
 						</div>
 						<div class="form-row">
@@ -104,6 +89,27 @@
 								<label for="expert-fees">Expert's Fees</label>
 								
 								<input type="text" class="form-control" id="expert-fees" :value="expert_fees | money_format" readonly="readonly" v-on:focus="select_all" />
+							</div>
+						</div>
+						<div class="form-row align-items-start">
+							<div class="form-group col-sm-4 col-md-4">
+								<label for="amount">Estimate Amount</label>
+
+								<input type="text" class="form-control form-control-lg font-weight-bold" id="amount" :value="amount | money_format" readonly="readonly" v-on:focus="select_all" v-on:dblclick="switch_amount_inputs" title="Double-Click to edit" />
+
+								<input type="text" class="form-control form-control-lg font-weight-bold d-none" id="amount-edit" v-on:focus="select_all" v-on:keyup="recalcuate" v-on:focusout="switch_amount_inputs" />
+
+								<small class="form-text text-muted">Double-Click to edit</small>
+							</div>
+							<div class="form-group col-sm-4 col-md-4">
+								<label for="client-amount">Client's Amount</label>
+								
+								<input type="text" class="form-control form-control-lg font-weight-bold" id="client-amount" :value="client_amount | money_format" readonly="readonly" v-on:focus="select_all" />
+							</div>
+							<div class="form-group col-sm-4 col-md-4">
+								<label for="expert-amount">Expert Amount</label>
+								
+								<input type="text" class="form-control form-control-lg font-weight-bold" id="expert-amount" :value="expert_amount | money_format" readonly="readonly" v-on:focus="select_all" />
 							</div>
 						</div>
 					</form>
