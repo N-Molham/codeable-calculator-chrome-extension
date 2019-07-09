@@ -125,6 +125,7 @@
 
 				if ( 'amount' === e.target.id ) {
 
+					show_input.value = hide_input.value.replace( /\$|,|\./g, '' );
 					show_input.focus();
 
 				}
